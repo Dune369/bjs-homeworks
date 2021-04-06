@@ -1,37 +1,40 @@
 "use strict"
 
-function getResult(a,b,c) {
-    let discriminant = b**2 - 4 * a * c;  
-    let x1 =  (-b + Math.sqrt(discriminant)) /  2 * a;
-    let x2 =  (-b - Math.sqrt(discriminant)) /  2 * a; 
-    let x = [];
-    
-    if (discriminant < 0){
-        return x = [];
+function getResult(a,b,c) {  
+    let discriminant = b**2 - 4 * a * c;  // Вычисляем дискриминант  
+    if (discriminant < 0) {
+        let noRoot= [];  
+        return noRoot = [];      
     } else if (discriminant > 0) {
-        return x = [x1, x2];
+        let twoRoot = [(-b + Math.sqrt(discriminant)) /  2 * a, 
+                        (-b - Math.sqrt(discriminant)) /  2 * a];
+        return twoRoot;
     } else { 
-        return x = [-b / 2 * a]; 
+        let oneRoot = [-b / 2 * a]; 
+        return oneRoot; 
    }
 }
 
 function getAverageMark(marks){   
     if (marks.length === 0) {
         return 0;
-    } else if (marks.length > 0) {
-        let resultSlice = marks.slice(0, 5);
-        let result = resultSlice.reduce(function(sum, current) {
-               return sum + current;
-         }, 0);    
-        let averageMark = result / resultSlice.length;
-        return averageMark;     
-    };     
-
+    } 
+    let resultSlice = marks.slice(0, 5);
+    let result = resultSlice.reduce((sum, current) => {
+            return sum + current;
+        }, 0);    
+    let averageMark = result / resultSlice.length;
+    return averageMark;     
 }
 
+
 function askDrink(name,dateOfBirthday){
+    let date = new Date(); // Текущяя дата
+    let year = date.getFullYear(); // Текущий год
+    let yaerBirthUser = dateOfBirthday.getFullYear(); // Год рождения пользователя
+    let ageUser = year - yaerBirthUser;
     let result = '';
-    if (dateOfBirthday >= 18) {
+    if (ageUser >= 18) {
       return result = `Не желаете ли олд-фэшн, ${name}?`;
     } else { 
       return result = `Сожалею, ${name}, но я не могу вам продать алкоголь. Могу предложить вам замечательный клюквенный компот!`;
