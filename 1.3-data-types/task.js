@@ -20,11 +20,11 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
        let currentDate = new Date();
        let currentDate2 = currentDate.getTime();
        let date2 = date.getTime();
-       let numberOfMonths = Math.ceil((((date2 - currentDate2) / 86400000) / 365) / 12) ;
+       let numberOfMonths = Math.round(((date2 - currentDate2) / 86400000) / 30.4375); 
  
        //Ежемесячная оплата
        let percentNumber33 = (percent / (12 * 100));
-       let payment =  returnBank * (percentNumber33 + percentNumber33/(((1 + percentNumber33)^numberOfMonths)-1))
+       let payment = returnBank * (percentNumber33 + percentNumber33/(((1 + percentNumber33)**numberOfMonths)-1))
        // Посчитайте общую сумму, которую придется заплатить клиенту.
        // Округлите результат до двух значений после запятой.
        let totalAmount = parseFloat((payment * numberOfMonths).toFixed(2))
