@@ -90,10 +90,9 @@ class Library {
             for (let book of this.books) {
                 if (book[type] === value) {
                     return book;
-                } else if (book[type] !== value){
-                    return null;
-                }
+                }  
             }
+            return null;
         }
 
     giveBookByName(bookName) {
