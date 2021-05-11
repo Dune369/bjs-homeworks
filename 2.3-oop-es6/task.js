@@ -150,19 +150,14 @@ class StudentLog {
 }
 
     getTotalAverage() {
-    
-        for (let value in this.obj) {
-             this.obj[value] = this.getAverageBySubject(value);
-        }
-        this.obj.average = Object.values(this.obj);
-        
         let sum = 0;
 
-        for (let i = 0; i < this.obj.average.length; i++) {
-        sum += this.obj.average[i];
+        for (let i = 0; i < Object.keys(this.obj).length; i++) {
+            sum += this.getAverageBySubject(Object.keys(this.obj)[i]);
         }
-    return sum / this.obj.average.length;
-         
+
+        return sum / Object.keys(this.obj).length;      
+
     }
 }
 
