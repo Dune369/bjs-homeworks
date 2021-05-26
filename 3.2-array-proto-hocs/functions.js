@@ -6,45 +6,42 @@ const weapons = [new Knife(), new Staff(), new Axe(), new StormStaff(), new Long
 
 // будет возвращать имена всех оружий
 function getNames() {
-    return weapons.map((currentValue) => {
-        return currentValue.name;
-    });
+    return weapons.map((currentValue) => 
+        currentValue.name
+    );
 }
 
 // принимает значение прочности и возвращает количество оружий больше принимаемой прочности
 function getCountReliableWeapons(endurance) {
-    return weapons.filter((number) => {
-        return number.durability > endurance;
-      }).length;
+    return weapons.filter((number) => 
+         number.durability > endurance
+      ).length;
 }
 
 // принимает значение прочности и возвращает вердикт: есть ли оружия прочней принимаемой прочности?
 function hasReliableWeapons(endurance) {
-    return weapons.some((number) => {
-        return number.durability > endurance;
-      });
+    return weapons.some((number) => 
+         number.durability > endurance
+      );
 }
 
 // принимает значение прочности и возвращает имена оружий, которые прочней полученного значения.
 function getReliableWeaponsNames(endurance) {
-    return weapons.filter((number) => {
-        return number.durability > endurance;
-      }).map((currentValue) => {
-        return currentValue.name;
-    });
-
+    return weapons.filter((number) => 
+         number.durability > endurance
+      ).map((currentValue) => 
+         currentValue.name
+    );
 }
 
 // вернёт общую сумму урона всех оружий.
 function getTotalDamage() {
-    return weapons.map((currentValue) => {
-        return currentValue.attack;
-    }).reduce((previousValue, currentValue) => {
-        return previousValue + currentValue;
-      });
+    return weapons.reduce((previousValue, currentValue) => {
+      return previousValue + currentValue.attack
+    },0);
 }
 
-
+getTotalDamage()
 
 // Задача №2. Ускорение долгих вычислений
 
@@ -65,23 +62,11 @@ function sum(...args) {
   }
 
 // 2.1.3. compareArrays - Создайте вспомогательную функцию compareArrays( arr1, arr2 ), которая с помощью функции высшего порядка будет сравнивать значения двух массивов. 
-
 function compareArrays (arr1, arr2) {
     return (arr1.every((currentValue, index) =>  currentValue == arr2[index]) && arr1.length == arr2.length);
 }
 
 // 2.2 Обёртка над оптимизацией любой функции
-
-function memorize(fn, limit) {
-  const memory = [];
-
-  return (...args) => {
-      
-      return fn(...args);
-  }
-
-}
-
 function memorize(fn, limit) {
   const memory = [
     {
@@ -94,10 +79,8 @@ function memorize(fn, limit) {
     }
   ];
 
-
   return (...args) => {
     const obj = {};
-
     const value = memory.find(item => compareArrays(item.args, [...args]));
     
     if (memory.length < limit) {
@@ -111,11 +94,6 @@ function memorize(fn, limit) {
     obj.args = [...args];
     obj.result = fn(...args);
     memory.push(obj);
-    return obj.result;
-
-    
-    
-      
+    return obj.result;   
   }
-
 }
