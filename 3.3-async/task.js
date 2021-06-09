@@ -21,7 +21,7 @@ class AlarmClock {
         this.alarmCollection.push({
             id: id,
             time: time,
-            callback: callback(),
+            callback: callback,
         });
     }
 
@@ -32,10 +32,10 @@ class AlarmClock {
 
     getCurrentFormattedTime() {
         let date = new Date();
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        return `${hours}:${minutes}`;
+        let formattedDate = Intl.DateTimeFormat(undefined, {hour: 'numeric', minute: 'numeric',}).format(date);
+        return formattedDate;
     }
+
 
     start() {
         let checkClock = (bell) => {
